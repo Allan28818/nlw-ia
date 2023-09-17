@@ -1,0 +1,36 @@
+# @name get-prompts
+GET http://localhost:3333/prompts
+
+###
+
+# @name upload-video
+POST http://localhost:3333/videos
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="example.mp3"
+Content-Type: audio/mpeg
+
+./example.mp3
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+
+###
+
+# @name create-transcription
+POST http://localhost:3333/videos/1514a9f0-ff75-4565-afdd-100b686889f0/transcription
+Content-Type: application/json
+
+{
+  "prompt": "seguro, 100%"
+}
+###
+
+# @name generate-ai-completion
+POST http://localhost:3333/ai/complete
+Content-Type: application/json
+
+{
+	"videoId": "29621a34-243a-489c-a179-d5d9ad49232e",
+	"template": "gpt3.5",
+	"temperature": 0.9
+}
